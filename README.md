@@ -383,3 +383,52 @@ END", con);
 3. aplicar índices/atualizar estatísticas em homologação e validar plano;
 4. agendar relatório para janela fora de pico e documentar mudanças;
 5. comunicar time on-call e fechar post-mortem com lições aprendidas.
+
+## USO DE IA/LLM
+
+Abaixo está a declaração de uso de IA/LLM para este desafio.
+
+## 1) Nível de uso por parte do desafio
+
+- Parte A (SQL): ☐ Não usei IA  ☑ Consultei IA  ☐ Usei IA para gerar parte do código/índices
+- Parte B (C#): ☐ Não usei IA  ☑ Consultei IA  ☐ Usei IA para gerar parte do código
+- Parte C (RCA): ☐ Não usei IA  ☐ Consultei IA  ☑ Usei IA para redigir parte do texto
+
+## 2) O que a IA produziu (3–6 linhas por parte)
+
+- **A)** Revisão do código, como melhoria de estrutura e elaboração de notas de perfomance
+- **B)** Sugestões de melhorias no código, como a implementação de padrões de projeto e boas práticas de programação.
+- **C)** Sugestões de melhorias na documentação, como a inclusão de exemplos e a clarificação de instruções.
+
+## 3) Prompts principais (cole abaixo)
+
+### Parte A (SQL)
+
+```md
+## Revisar a Procedure (SQL)
+> **Prompt:**  
+> Eu sou um avaliador técnico. Analise a procedure `usp_LoadFato_PrazosExpedicao` (anexo/cole o código aqui). Faça:  
+> 1) resumo do que ela faz (1 linha);  
+> 2) liste bugs/riscos/ (race conditions, performance, falha em dados nulos);  
+> 3) sugira correções concretas (SQL)
+> 4) gere comandos SQL para validar o resultado (selects com valores esperados).  
+> **Formato de saída:** pontos 1–4.
+```
+
+### Parte B (C#)
+
+```md
+## Revisar o Worker (C#) — segurança, concorrência e shutdown
+> **Prompt:**  
+> Sou um avaliador. Aqui está o arquivo `B-Worker.cs` (cole). Revise como um engenheiro sênior .NET: liste problemas funcionais, riscos de produção e melhorias (max 10 itens). Proponha um patch (diff ou arquivo completo) que implemente: async/await end-to-end, CancellationToken, limite de concorrência, retry/backoff (polly pseudocódigo aceitável) e logs estruturados.
+> **Formato de saída:** 1) lista; 2) snippet de patch; 3) xUnit test template; 4) instruções para rodar localmente.
+```
+
+### Parte C (RCA)
+
+```md
+## Produzir RCA final formatado
+> **Prompt:**  
+> Com base nos logs e na descrição do incidente (latência de gravação 5ms→120ms; PageLatch/Lock waits; UPDATEs massivos e relatório de leitura), escreva uma RCA de **8–12 linhas** cobrindo: causa provável, mitigação imediata, prevenção e runbook (ação passo-a-passo).
+**Resposta esperada:** RCA pronta (8–12 linhas) e runbook enumerado.
+```
